@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{experiment.title}}</title>
+  </head>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial;
+        padding: 20px;
+        background: #182869;
+      }
+
+      .header {
+        padding: 2px;
+        font-size: 40px;
+        text-align: center;
+        background: white;
+        align-content: center;
+      }
+
+      .title {
+        margin-bottom: 30px;
+      }
+
+      button {
+        width: 450px;
+        border: none;
+        font-family: serif;
+        font-weight: 700;
+        font-size: 1.2rem;
+        border-radius: 12px;
+        cursor: pointer;
+        background-color: hsl(245, 75%, 52%);
+        margin: 20px;
+        padding: 1rem 0;
+        color: white;
+        box-shadow: 0 20px 30px -8px rgb(197 189 245);
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+
+      .leftcolumn {
+        float: left;
+        width: 100%;
+      }
+
+      .card {
+        background-color: white;
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      @media screen and (max-width: 800px) {
+        .leftcolumn,
+        .rightcolumn {
+          width: 100%;
+          padding: 0;
+        }
+      }
+    </style>
+
+  <body>
+    <div class="header">
+      <h2 class="title">Science Experiments</h2>
+      <a style="text-decoration: none" href="{{experiment.title}}/chat"><button>Join group chat</button><a>
+    </div>
+
+    <div class="row">
+      <div class="leftcolumn">
+        <div class="card">
+          <h1>{{experiment.title}}</h1>
+          <img src="/{{experiment.main_image}}" alt="Image" />
+          <h3>DESCRIPTION : {{experiment.one_liner}}</h3>
+          <h5>DIFFICULTY LEVEL - {{experiment.dificulty}}/5<h5>
+          <h5>SUBJECT - {{experiment.subject}}</h5>
+          <div>
+            <h3>MATERIALS REQUIRED :-<h3>
+            {% for material in materials %}
+              <h4>{{material.name}} - {{material.quantity}}</h4>
+            {% endfor %}
+          <div>
+          <div>
+            <h2>PROCEDURE :-</h2>
+            {% for procedure in procedures %}
+              <h3>Step - {{procedure.step_number}}</h3>
+              <p>{{procedure.description}}<p>
+
+              <img src="{% static procedure.step_image|slice:'7:' %}" alt="Image" />
+              
+            {% endfor %}
+          <div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
